@@ -2,25 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Todo List</title>
+<title>AI Math Teacher</title>
 <style>
   body { font-family: Arial, sans-serif; max-width: 400px; margin: 40px auto; }
   h1 { text-align: center; }
-  #todo-form { display: flex; gap: 8px; margin-bottom: 16px; }
-  #todo-input { flex: 1; padding: 8px; }
-  #todo-form button { padding: 8px 12px; }
-  #todo-list { list-style: none; padding: 0; }
-  #todo-list li { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #ccc; }
-  #todo-list li button { background: #e74c3c; color: #fff; border: none; padding: 4px 8px; cursor: pointer; }
+  section { margin-bottom: 16px; }
+  h2 { font-size: 16px; margin-bottom: 8px; }
+  #generate-btn { padding: 8px 12px; width: 100%; }
+  #question-display { font-size: 24px; text-align: center; padding: 16px; border: 1px solid #ccc; margin-top: 8px; min-height: 24px; }
+  #answer-form { display: flex; gap: 8px; }
+  #answer-input { flex: 1; padding: 8px; }
+  #answer-form button { padding: 8px 12px; }
+  #feedback { text-align: center; padding: 8px; margin-top: 8px; font-weight: bold; }
+  #feedback.correct { color: #2ecc71; }
+  #feedback.incorrect { color: #e74c3c; }
+  #feedback.info { color: #888; }
 </style>
 </head>
 <body>
-<h1>Todo List</h1>
-<form id="todo-form">
-  <input type="text" id="todo-input" placeholder="Add a new todo" required>
-  <button type="submit">Add</button>
-</form>
-<ul id="todo-list"></ul>
+<h1>AI Math Teacher</h1>
+
+<section>
+  <h2>Teacher</h2>
+  <button id="generate-btn">Generate Question</button>
+  <div id="question-display">Click "Generate Question" to begin</div>
+</section>
+
+<section>
+  <h2>Examiner</h2>
+  <form id="answer-form">
+    <input type="number" id="answer-input" placeholder="Your answer" required>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="feedback"></div>
+</section>
 
 <script src="script.js"></script>
 </body>

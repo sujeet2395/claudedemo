@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-A minimal, dependency-free Todo List web app: static `index.html` plus `script.js`. No build tools, package manager, or test framework are present.
+A minimal, dependency-free AI Math Teacher/Examiner web app: static `index.html` plus `script.js`. No build tools, package manager, or test framework are present.
 
 ## Running
 
@@ -12,7 +12,7 @@ Open `index.html` directly in a browser (or serve the directory with any static 
 
 ## Architecture
 
-- `index.html` — page structure/styles and the form/list DOM elements (`#todo-form`, `#todo-input`, `#todo-list`).
-- `script.js` — all app logic: an in-memory `todos` array (not persisted), a `render()` function that rebuilds the `#todo-list` DOM from that array, and a submit handler that adds items. Each rendered `<li>` gets its own delete button wired via closures over the array index.
+- `index.html` — page structure/styles and the DOM elements for the Teacher (`#generate-btn`, `#question-display`) and Examiner (`#answer-form`, `#answer-input`, `#feedback`) sections.
+- `script.js` — all app logic: `generateQuestion()` picks two random integers and an operator (`+`, `-`, `*`), computes the correct answer, and stores it as `currentQuestion`; the Generate button click handler calls it to display a new equation; the answer form's submit handler compares the student's input to `currentQuestion.correctAnswer` and renders correct/incorrect feedback.
 
-State is kept purely in memory (`todos` array in `script.js`); reloading the page clears all todos.
+There is no real AI/LLM call — "Teacher" and "Examiner" are just labeled UI sections backed by plain client-side JS logic. State is kept purely in memory (`currentQuestion` in `script.js`); reloading the page or generating a new question discards the previous one (no history).
