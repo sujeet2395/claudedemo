@@ -1,0 +1,54 @@
+{
+  "model": "sonnet",
+  "effortLevel": "low",
+  "modelSettings": {
+    "claude-sonnet-5": {
+      "effortLevel": "low"
+    }
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git -C * status)",
+      "Bash(git add *)",
+      "Bash(npm run *)",
+      "Bash(pnpm *)",
+      "Bash(yarn *)",
+      "Write(tests/**)",
+      "WebFetch(domain:*.npmjs.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:registry.npmjs.org)"
+    ],
+    "deny": [
+      "Read(**/secrets/**)",
+      "Read(**/*.key)",
+      "Read(**/*.pem)",
+      "Edit(**/.env*)",
+      "Write(**/.env*)",
+      "Bash(rm *)",
+      "Bash(sudo *)",
+      "Bash(chmod 777 *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git pull --rebase *)",
+      "Bash(git push --force *)",
+      "Bash(npm publish *)",
+      "Bash(docker push *)",
+      "Edit(package.json)",
+      "Edit(README.md)"
+    ],
+    "defaultMode": "default"
+  },
+  "companyAnnouncements": [
+    "👋 Welcome! New to this codebase? Ask Claude Code: 'Explain the architecture of this project.'",
+    "📖 Follow our coding guidelines before committing changes.",
+    "🔍 Always run tests before pushing code.",
+    "🛡️ Never commit secrets, tokens, or credentials to the repository.",
+    "📝 Write meaningful commit messages — future you will thank you.",
+    "👀 Every PR must go through code review before merging.",
+    "⚡ Tip: Ask Claude Code to explain complex functions or trace request flows.",
+    "🧪 If you add new logic, add unit tests as well.",
+    "📦 Keep dependencies updated and remove unused libraries.",
+    "🚀 Small, focused PRs are easier to review and merge."
+  ]
+}
