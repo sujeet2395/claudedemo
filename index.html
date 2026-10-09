@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>AI Math Teacher</title>
 <style>
-  body { font-family: Arial, sans-serif; max-width: 400px; margin: 40px auto; }
+  body { font-family: Arial, sans-serif; max-width: 440px; margin: 40px auto; }
   h1 { text-align: center; }
   section { margin-bottom: 16px; }
   h2 { font-size: 16px; margin-bottom: 8px; }
@@ -17,11 +17,30 @@
   #feedback.correct { color: #2ecc71; }
   #feedback.incorrect { color: #e74c3c; }
   #feedback.info { color: #888; }
+  #mode-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+  #mode-toggle button { flex: 1; padding: 8px 12px; }
+  #mode-toggle button.active { background: #333; color: #fff; }
+  [hidden] { display: none !important; }
+  #quad-generate-btn { padding: 8px 12px; width: 100%; }
+  #quad-question-display { font-size: 24px; text-align: center; padding: 16px; border: 1px solid #ccc; margin-top: 8px; min-height: 24px; }
+  #quad-form { display: flex; flex-direction: column; gap: 8px; }
+  #quad-form input { padding: 8px; }
+  #quad-form button { padding: 8px 12px; }
+  #quad-feedback { text-align: center; padding: 8px; margin-top: 8px; font-weight: bold; white-space: pre-line; }
+  #quad-feedback.correct { color: #2ecc71; }
+  #quad-feedback.incorrect { color: #e74c3c; }
+  #quad-feedback.info { color: #888; }
 </style>
 </head>
 <body>
 <h1>AI Math Teacher</h1>
 
+<div id="mode-toggle">
+  <button id="mode-practice" class="active">Practice</button>
+  <button id="mode-quadratic">Quadratic</button>
+</div>
+
+<div id="practice-section">
 <section>
   <h2>Teacher</h2>
   <button id="generate-btn">Generate Question</button>
@@ -36,6 +55,25 @@
   </form>
   <div id="feedback"></div>
 </section>
+</div>
+
+<div id="quadratic-section" hidden>
+  <section>
+    <h2>Teacher (Claude Haiku)</h2>
+    <button id="quad-generate-btn">Generate Quadratic</button>
+    <div id="quad-question-display">Click "Generate Quadratic" to begin</div>
+  </section>
+
+  <section>
+    <h2>Examiner</h2>
+    <form id="quad-form">
+      <input type="text" id="root1-input" placeholder="Root 1 (e.g. 2 or 1+2i)" required>
+      <input type="text" id="root2-input" placeholder="Root 2 (e.g. 3 or 1-2i)" required>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="quad-feedback"></div>
+  </section>
+</div>
 
 <script src="script.js"></script>
 </body>

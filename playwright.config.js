@@ -2,6 +2,13 @@ const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests/e2e',
+  // Quadratic tests need http:// (Chrome blocks fetch from file://).
+  webServer: {
+    command: 'node server.js',
+    url: 'http://localhost:3100',
+    env: { PORT: '3100' },
+    reuseExistingServer: true,
+  },
   projects: [
     {
       name: 'chrome',

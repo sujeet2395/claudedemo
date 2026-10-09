@@ -4,15 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-A minimal, dependency-free AI Math Teacher/Examiner web app: static `index.html` plus `script.js`. No build tools, package manager, or test framework are present.
+A small AI Math Teacher/Examiner web app with two levels: random arithmetic practice (static, client-only) and LLM-generated quadratic equations (needs `server.js`). The app has no npm runtime dependencies; Playwright is a dev dependency for e2e tests.
 
 ## Running
 
-Open `index.html` directly in a browser (or serve the directory with any static file server). There is no build/compile step.
+- Level 1 (Practice): open `index.html` directly in a browser.
+- Level 2 (Quadratic): set `ANTHROPIC_API_KEY`, run `npm start`, open http://localhost:3000.
+- Tests: `npx playwright test --project=chrome` (quadratic tests mock the API, no key needed).
 
 ## Architecture
 
-- `index.html` — page structure/styles and the DOM elements for the Teacher (`#generate-btn`, `#question-display`) and Examiner (`#answer-form`, `#answer-input`, `#feedback`) sections.
-- `script.js` — all app logic: `generateQuestion()` picks two random integers and an operator (`+`, `-`, `*`), computes the correct answer, and stores it as `currentQuestion`; the Generate button click handler calls it to display a new equation; the answer form's submit handler compares the student's input to `currentQuestion.correctAnswer` and renders correct/incorrect feedback.
+- `index.html` — page structure/styles. A mode toggle (`#mode-practice`, `#mode-quadratic`) switches between `#practice-section` (Teacher `#generate-btn`/`#question-display`, Examiner `#answer-form`/`#answer-input`/`#feedback`) and `#quadratic-section` (`#quad-generate-btn`, `#quad-form` with `#root1-input`/`#root2-input`, `#quad-feedback`).
+- `script.js` — all client logic. Practice: `generateQuestion()` picks two random integers and an operator and stores `currentQuestion`. Quadratic: `generateQuadratic()` POSTs to `/api/quadratic` for coefficients, `solveQuadratic()` computes the true (possibly complex) roots, `parseComplex()` reads the student's input, and the form handler compares roots as an unordered pair.
+- `server.js` — dependency-free Node server: serves the static files and `POST /api/quadratic`, which asks Claude Haiku (`claude-haiku-5-5`) for `{a,b,c}`, validates it, retries once, then falls back to random coefficients. The model never supplies the answer; correctness is always computed locally. The API key stays server-side.
+- `tests/e2e/` — Playwright specs (`math-app.spec.js` for practice, `quadratic.spec.js` for the quadratic level).
 
-There is no real AI/LLM call — "Teacher" and "Examiner" are just labeled UI sections backed by plain client-side JS logic. State is kept purely in memory (`currentQuestion` in `script.js`); reloading the page or generating a new question discards the previous one (no history).
+State is kept purely in memory (`currentQuestion`, `currentQuadratic`); no history is persisted.
