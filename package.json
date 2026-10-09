@@ -1,0 +1,23 @@
+{
+  "name": "claudedemo",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sujeet2395/claudedemo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sujeet2395/claudedemo/issues"
+  },
+  "homepage": "https://github.com/sujeet2395/claudedemo#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0"
+  }
+}
